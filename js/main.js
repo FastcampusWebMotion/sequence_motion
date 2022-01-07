@@ -24,9 +24,15 @@ imgs.forEach(img=>{
 
             setTimeout(()=>{
                 loading.remove();
-            },2500)
+            },convertSpeed(loading))
         } 
     })
 })
+
+function convertSpeed(el){
+    let speed = getComputedStyle(el).transitionDuration;
+    speed = parseFloat(speed)*1000;
+    return speed;
+}
 
 
