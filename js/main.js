@@ -1,4 +1,5 @@
 const main = document.querySelector('main');
+const loading = document.querySelector('aside');
 
 for(let i=0; i<200; i++){
     const imgNode = document.createElement('img');
@@ -9,13 +10,22 @@ for(let i=0; i<200; i++){
 const imgs = document.querySelectorAll('img');
 const len = imgs.length;
 let total = 0;
+let percent = 0;
 
 imgs.forEach(img=>{
     img.addEventListener('load',()=>{
         total++;
-        console.log(total);
+        percent = parseInt((total/len)*100);
+        loading.innerText = `${total} / ${len} (${percent}%)`;
 
-        if(total === len) main.classList.add('on');
+        if(total === len){
+            main.classList.add('on');
+            loading.classList.add('off');
+
+            setTimeout(()=>{
+                loading.remove();
+            },2500)
+        } 
     })
 })
 
